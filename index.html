@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/3.0.5/daterangepicker.min.js"
+    ></script>
+
+    <style>
+      @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css");
+      .global {
+        margin: 25px;
+      }
+      .first {
+        display: flex;
+        height: 43px;
+      }
+      .icon {
+        padding: 0 10px;
+        color: #014268;
+      }
+      .car {
+        background-color: white;
+        box-shadow: 0 12px 17px 3px rgb(0 0 0 / 4%);
+        color: #014268;
+        padding: 20px;
+      }
+      .container {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 80px;
+        box-shadow: 0 12px 17px 3px rgb(0 0 0 / 4%);
+        background: white;
+      }
+      .contenu {
+        border-color: #014268;
+        outline: none;
+        /*  background: #6993C9; */
+        border-right: solid 1px #dbdbdb;
+        padding: 20px;
+        width: 41%;
+      }
+      .title {
+        margin: 0;
+        padding-bottom: 10px;
+        letter-spacing: 1.54px;
+      }
+      .title-color {
+        color: #4a4a4a;
+      }
+      .flex {
+        display: flex;
+      }
+
+      .dates {
+        max-width: 22%;
+        cursor: pointer;
+      }
+
+      .booking {
+        min-width: 13%;
+        border-style: solid;
+        border-width: 0 0 0 1px;
+        border-color: #dbdbdb;
+      }
+      .submit-button {
+        background-color: #014268;
+        color: white;
+        border: none;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+      }
+
+      .daterangepicker {
+        width: 96%;
+        margin: 0 25px;
+        position: sticky;
+        border-radius: initial;
+        border-color: #014268;
+      }
+      .daterangepicker .drp-calendar {
+        width: 48%;
+        max-width: none;
+      }
+      .daterangepicker td.start-date.end-date {
+        border-radius: initial;
+      }
+
+      .daterangepicker td.active,
+      .daterangepicker td.active:hover {
+        background-color: #014268;
+      }
+      .daterangepicker td.start-date {
+        border-radius: initial;
+      }
+      .daterangepicker td.end-date {
+        border-radius: initial;
+      }
+      .daterangepicker .drp-buttons .btn {
+        background-color: white;
+        color: #014268;
+        border: 1px solid #014268;
+        padding: 10px;
+      }
+      .daterangepicker td.in-range {
+        border-bottom: 1px solid #014268;
+        border-top: 1px solid #014268;
+      }
+
+      .dropdown {
+        position: relative;
+        padding: 0;
+        border-color: #014268;
+        outline: none;
+        border-right: solid 1px #dbdbdb;
+        width: 41%;
+      }
+
+      .padding {
+        padding: 20px;
+      }
+
+      .dropdown-content {
+        position: absolute;
+        z-index: 100;
+        display: none;
+        width: 340px;
+        border: 1px solid #014268;
+        background: white;
+        margin-top: 20px;
+      }
+
+      .dropdown-content span {
+        color: black;
+        text-decoration: none;
+        display: block;
+        color: #014268;
+        font-size: 12px;
+      }
+
+      .dropdownMenu-options-title {
+        padding: 0 20px 20px;
+        font-weight: 600;
+      }
+      .dropdownMenu-options {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+      }
+      .show {
+        display: block;
+      }
+
+      .custom-input-number {
+        display: flex;
+        padding-right: 10px;
+      }
+
+      .input-number-button {
+        cursor: pointer;
+        display: inline-block;
+        width: 25px;
+        padding: 0;
+        border-radius: 50%;
+        background: #014268;
+        color: white;
+        line-height: 22px;
+        text-align: center;
+
+        height: 25px;
+        border: 0;
+        user-select: none;
+      }
+      .input-number {
+        display: inline-block;
+        width: 40px;
+        padding: 0 10px;
+        outline: none;
+        line-height: 25px;
+        text-align: center;
+        vertical-align: top;
+        pointer-events: none;
+      }
+
+      .select-wrapper {
+        position: relative;
+        border: 1px solid #014268;
+        border-radius: 16px;
+        margin-right: 10px;
+      }
+
+      .input-select {
+        appearance: none;
+        width: 52px;
+        height: 24px;
+        padding-left: 10px;
+        border: none;
+        border-radius: 16px;
+        outline: none;
+        background: rgba(0, 0, 0, 0);
+      }
+
+      .driver {
+        border-top: 1px solid #dbdbdb;
+      }
+
+      .addRooms {
+        display: flex;
+        padding: 10px;
+      }
+      .addRooms span {
+        font-weight: 600;
+      }
+      .confirmRooms {
+        margin: 5%;
+      }
+      .confirmRoomsButton {
+        padding: 10px;
+        width: 100%;
+        background-color: #014268;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .content-container {
+        display: flex;
+        flex-direction: row;
+        padding: 0 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="global">
+      <div class="first">
+        <div class="car"><i class="fa-solid fa-bed icon"></i> Hotel</div>
+      </div>
+      <div class="container">
+        <div class="contenu">
+          <h5 class="title title-color">DESTINATION</h5>
+          <div class="flex">
+            <i class="fa-solid fa-location-dot icon"></i>
+            <div class="title-color">Blue Beach Golf and Spa</div>
+          </div>
+        </div>
+        <a class="dates contenu" id="dateRange">
+          <h5 class="title title-color">DATE</h5>
+          <div class="flex">
+            <i class="fa-solid fa-calendar-days icon"></i>
+            <div id="dateSelection" class="title-color">Arrival and departure</div>
+          </div>
+        </a>
+        <div class="dropdown dates">
+          <div class="padding" id="persons">
+            <h5 class="title title-color">PERSONS</h5>
+            <div class="flex">
+              <i class="fa-solid fa-person icon"></i>
+              <div class="title-color" id="adult">2</div>
+              <i class="fa-solid fa-bed icon"></i>
+              <div class="title-color" id="roomCount">1</div>
+            </div>
+          </div>
+          <div id="dropdownMenu" class="dropdown-content title">
+            <div id="room" class="room">
+              <span class="padding">ROOM</span>
+              <div class="dropdownMenu-options">
+                <span class="dropdownMenu-options-title">Adults</span>
+                <div class="custom-input-number">
+                  <button class="input-number-button" id="adult-decrement">
+                    -
+                  </button>
+                  <span id="adultCounter" class="input-number">2</span>
+                  <button class="input-number-button" id="adult-increment">
+                    +
+                  </button>
+                </div>
+              </div>
+              <div class="dropdownMenu-options">
+                <span class="dropdownMenu-options-title">Kids</span>
+                <div class="custom-input-number">
+                  <button class="input-number-button" id="children-decrement">
+                    -
+                  </button>
+                  <span id="childrenCounter" class="input-number">0</span>
+                  <button class="input-number-button" id="children-increment">
+                    +
+                  </button>
+                </div>
+              </div>
+              <template id="age-children">
+                <div class="dropdownMenu-options">
+                  <span class="dropdownMenu-options-title childNumber"></span>
+                  <div class="select-wrapper">
+                    <select name="age" id="age" class="input-select" required>
+                      <option value>#</option>
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                    </select>
+                  </div>
+                </div>
+              </template>
+              <div id="childrenContainer"></div>
+              <div class="driver"></div>
+            </div>
+            <template id="close-room">
+              <div id="room">
+                <div class="dropdownMenu-options">
+                  <span class="padding">ROOM</span>
+                  <div>
+                    <i
+                      class="fa-regular fa-pen-to-square icon updateRoom"
+                      id="updateRoom"
+                    ></i>
+                    <i
+                      class="fa-regular fa-trash-can icon deleteRoom"
+                      id="deleteRoom"
+                    ></i>
+                  </div>
+                </div>
+                <div class="content-container finalNumbersPerRoom">
+                  <span id="countAdultForRoom"></span>
+                  <span class="dropdownMenu-options-title">Adults</span>
+                  <span id="countChildrenForRoom"></span>
+                  <span class="dropdownMenu-options-title">Kids</span>
+                  <span id="allAges" style="display: none"></span>
+                </div>
+              </div>
+            </template>
+            <div id="closeRoomsContainer"></div>
+            <div class="driver"></div>
+            <div id="roomsContainer"></div>
+            <div class="addRooms" id="addRooms">
+              <i class="fa-solid fa-plus icon"></i>
+              <span>Add rooms</span>
+            </div>
+            <div class="confirmRooms">
+              <button class="confirmRoomsButton" id="confirmRooms">
+                Confirmer
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="booking">
+          <button class="submit-button" id="booking">Book</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        moment.locale("fr");
+        $("#dateRange").daterangepicker(
+          {
+            locale: {
+              format: "DD/MM/YYYY",
+              applyLabel: "Apply",
+              cancelLabel: "Cancel",
+              fromLabel: "From",
+              toLabel: "To",
+              customRangeLabel: "Personnalisé",
+              daysOfWeek: ["Sun", "Mon", "Tue", "Wes", "Thu", "Fri", "Sat"],
+              monthNames: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November,
+                "December
+              ],
+            },
+            minDate: moment(),
+            opens: "center",
+          },
+          function (start, end, label) {
+            // Callback appelé lorsque les dates sont sélectionnées
+            $("#dateSelection").text(
+              start.format("DD/MM/YYYY") + " - " + end.format("DD/MM/YYYY")
+            );
+          }
+        );
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const triggerElement = document.getElementById("persons");
+        const dropdownMenu = document.getElementById("dropdownMenu");
+
+        triggerElement.addEventListener("click", () => {
+          dropdownMenu.classList.toggle("show");
+        });
+
+        triggerElement.addEventListener("keydown", (event) => {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            dropdownMenu.classList.toggle("show");
+          }
+        });
+
+        // Ferme la liste déroulante si l'utilisateur clique à l'extérieur
+        window.addEventListener("click", (event) => {
+          if (
+            !event.target.closest("#persons") &&
+            !event.target.closest("#adult-decrement") &&
+            !event.target.closest("#adult-increment") &&
+            !event.target.closest("#children-decrement") &&
+            !event.target.closest("#children-increment") &&
+            !event.target.closest("#age") &&
+            !event.target.closest("#addRooms") &&
+            !event.target.closest("#deleteRoom") &&
+            !event.target.closest("#updateRoom")
+          ) {
+            if (dropdownMenu.classList.contains("show")) {
+              dropdownMenu.classList.remove("show");
+            }
+          }
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        const counterElement = document.getElementById("adultCounter");
+        const adultElement = document.getElementById("adult");
+        const incrementAdult = document.getElementById("adult-increment");
+        const decrementAdult = document.getElementById("adult-decrement");
+
+        const childrenElement = document.getElementById("childrenCounter");
+        const incrementChildren = document.getElementById("children-increment");
+        const decrementChildren = document.getElementById("children-decrement");
+
+        const ageChildren = document.getElementById("age-children").content;
+        const childrenContainer = document.getElementById("childrenContainer");
+
+        const closeRoomElement = document.getElementById("close-room").content;
+        const closeRoomsContainerElement = document.getElementById(
+          "closeRoomsContainer"
+        );
+        const confirmRooms = document.getElementById("confirmRooms");
+        const bookingElement = document.getElementById("booking");
+
+        let countAdult = 2;
+        incrementAdult.addEventListener("click", () => {
+          if (countAdult < 5) {
+            countAdult = parseInt(counterElement.textContent) + 1;
+            let totalAdultElement = parseInt(adultElement.textContent) + 1;
+            counterElement.textContent = countAdult;
+            adultElement.textContent = totalAdultElement;
+          }
+        });
+
+        decrementAdult.addEventListener("click", () => {
+          if (countAdult > 1) {
+            countAdult = parseInt(counterElement.textContent) - 1;
+            let totalAdultElement = parseInt(adultElement.textContent) - 1;
+            counterElement.textContent = countAdult;
+            adultElement.textContent = totalAdultElement;
+          }
+        });
+        let allAges = [];
+        function pickChildrenAge() {
+          const clone = document.importNode(ageChildren, true);
+          const ageElement = clone.getElementById("age");
+          clone.querySelector(
+            ".childNumber"
+          ).textContent = `Âge de l'enfant ${countChildren}`;
+          childrenContainer.appendChild(clone);
+          ageElement.addEventListener("click", () => {
+            const selects = document.querySelectorAll(
+              "#childrenContainer .input-select"
+            );
+            const ages = Array.from(selects)
+              .map((select) => select.value)
+              .filter((value) => value);
+            allAges = [ages];
+          });
+        }
+
+        let countChildren = 0;
+        incrementChildren.addEventListener("click", () => {
+          if (countChildren < 4) {
+            countChildren = parseInt(childrenElement.textContent) + 1;
+            childrenElement.textContent = countChildren;
+            pickChildrenAge();
+          }
+        });
+
+        decrementChildren.addEventListener("click", () => {
+          if (countChildren > 0) {
+            countChildren = parseInt(childrenElement.textContent) - 1;
+            childrenElement.textContent = countChildren;
+            const lastChild = childrenContainer.lastElementChild;
+            childrenContainer.removeChild(lastChild);
+          }
+        });
+
+        const addRoomElement = document.getElementById("addRooms");
+        const roomCountElement = document.getElementById("roomCount");
+        const roomElement = document.getElementById("room");
+        const roomsContainerElement = document.getElementById("roomsContainer");
+
+        const adultCounterElement = document.getElementById("adultCounter");
+
+        const ageChildrenElement = document.getElementById("allAges")
+
+        roomsContainerElement.appendChild(roomElement);
+
+        let countRooms = 1;
+
+        function cloneRoom() {
+          const cloneCloseRoom = document.importNode(closeRoomElement, true);
+
+          const countAdultForRoom =
+            cloneCloseRoom.getElementById("countAdultForRoom");
+          const countChildrenForRoom = cloneCloseRoom.getElementById(
+            "countChildrenForRoom"
+          );
+          const setAgesChild = cloneCloseRoom.getElementById("allAges");
+
+          closeRoomsContainerElement.appendChild(cloneCloseRoom);
+
+          setAgesChild.textContent = allAges;
+
+          countChildrenForRoom.textContent = childrenElement.textContent;
+          countAdultForRoom.textContent = adultCounterElement.textContent;
+
+          adultCounterElement.textContent = 2;
+          childrenElement.textContent = 0;
+
+          if (childrenElement.textContent == 0) allAges = [];
+          while (childrenContainer.firstChild) {
+            childrenContainer.removeChild(childrenContainer.firstChild);
+          }
+        }
+
+        addRoomElement.addEventListener("click", () => {
+          countRooms++;
+          roomCountElement.textContent = countRooms;
+
+          cloneRoom()
+
+          const rooms = document.querySelectorAll(".finalNumbersPerRoom");
+          let totalAdult = 0;
+          let totalChildren = 0;
+          for (let i = 0; i < rooms.length; i++) {
+            const adultPerRoom = rooms[i].childNodes[1].textContent;
+            const childrenPerRoom = rooms[i].childNodes[5].textContent;
+            if (i == 0) totalAdult = totalAdult + parseInt(adultPerRoom) + 2;
+            else totalAdult = totalAdult + parseInt(adultPerRoom);
+            totalChildren = totalChildren + parseInt(childrenPerRoom);
+            adultElement.textContent = totalAdult;
+          }
+
+          //delete Room
+          const deleteRoomElement =
+            closeRoomsContainerElement.querySelector(".deleteRoom");
+          closeRoomsContainerElement.addEventListener(
+            "click",
+            function (event) {
+              if (event.target && event.target.matches("#deleteRoom")) {
+                // Find the parent element of the room and delete it.
+                const roomElement = event.target.closest("#room");
+                totalAdult -= parseInt(
+                  roomElement.querySelector("#countAdultForRoom").textContent
+                );
+                adultElement.textContent = totalAdult;
+                if (roomElement && !roomElement.dataset.removed) {
+                  countRooms--;
+                  roomCountElement.textContent = countRooms;
+                  roomElement.dataset.removed = true;
+                  roomElement.remove();
+                }
+              }
+            }
+          );
+
+          function pickChildrenAge() {
+            const clone = document.importNode(ageChildren, true);
+            clone.querySelector(
+              ".childNumber"
+            ).textContent = `Child's age 1`;
+            childrenContainer.appendChild(clone);
+          }
+
+          //update Room
+          const updateRoomElement =
+            closeRoomsContainerElement.querySelector(".updateRoom");
+          closeRoomsContainerElement.addEventListener(
+            "click",
+            function (event) {
+              if (event.target && event.target.matches("#updateRoom")) {
+                // Find the parent element of the room and update it.
+                const roomUpdateElement = event.target.closest("#room");
+
+                if (roomUpdateElement && !roomUpdateElement.dataset.updated) {
+                  roomUpdateElement.dataset.updated = "true";
+
+                  const cloneCloseRoom = document.importNode(
+                    closeRoomElement,
+                    true
+                  );
+                  const countAdultForRoom =
+                    cloneCloseRoom.querySelector("#countAdultForRoom");
+
+                  const countChildrenForRoom = cloneCloseRoom.querySelector(
+                    "#countChildrenForRoom"
+                  );
+                  countAdultForRoom.textContent =
+                    adultCounterElement.textContent;
+                  countChildrenForRoom.textContent =
+                    childrenElement.textContent;
+                  closeRoomsContainerElement.appendChild(cloneCloseRoom);
+
+                  const adultCount =
+                    roomUpdateElement.querySelector(
+                      "#countAdultForRoom"
+                    ).textContent;
+                  const childrenCount = roomUpdateElement.querySelector(
+                    "#countChildrenForRoom"
+                  ).textContent;
+
+                  adultCounterElement.textContent = adultCount;
+                  childrenElement.textContent = childrenCount;
+
+                  roomUpdateElement.remove();
+                }
+              }
+            }
+          );
+        });
+
+        confirmRooms.addEventListener("click", () => {
+          cloneRoom()
+        });
+
+        bookingElement.addEventListener("click", () => {
+          var text = $("#dateSelection").text();
+
+          // Expression régulière pour extraire les dates au format DD/MM/YYYY
+          var datePattern = /(\d{2}\/\d{2}\/\d{4})\s*-\s*(\d{2}\/\d{2}\/\d{4})/;
+
+          function convertToISO(dateStr) {
+            var parts = dateStr.split("/");
+            return parts[2] + "-" + parts[1] + "-" + parts[0];
+          }
+          var match = text.match(datePattern);
+          if(!match){
+            alert("Please fill in all the required fields.")
+          }
+          var checkIn = convertToISO(match[1]);
+          var checkout = convertToISO(match[2]);
+          var nights =
+            (new Date(checkout) - new Date(checkIn)) / (1000 * 60 * 60 * 24);
+          const rooms = document.querySelectorAll(".finalNumbersPerRoom");
+          const roomData = [];
+
+          rooms.forEach((room) => {
+            const adultElement = room.children[0];
+            const ageElement = room.children[4];
+            const childElement = room.children[2]
+            const adultPerRoom = adultElement
+              ? adultElement.textContent.trim()
+              : "0";
+            const ageChildrenPerRoom = ageElement
+              ? ageElement.textContent.trim()
+              : "0";
+            const childrenPerRoom = childElement ? childElement.textContent.trim() : "0"
+            roomData.push({
+              adults: adultPerRoom,
+              childrenAge: ageChildrenPerRoom,
+              children : childrenPerRoom
+            });
+          });
+          const formattedRooms = roomData
+            .map((room) => {
+              console.log(room)
+              return room.children === "0" ? `${room.adults}` : `${room.adults},${room.childrenAge}`;
+            })
+            .join(";");
+          window.open(
+            `https://booking.bluebeach.tn/hotel/tn-monastir/blue-beach-golf-and-spa-1/${checkIn}/${nights}/${formattedRooms}`
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
