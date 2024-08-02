@@ -387,7 +387,7 @@
               fromLabel: "From",
               toLabel: "To",
               customRangeLabel: "Customised",
-              daysOfWeek: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+              daysOfWeek: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
               monthNames: ["January",
                 "February",
                 "March",
@@ -679,7 +679,7 @@
           }
           var match = text.match(datePattern);
           if(!match){
-            alert("Veuillez remplir tous les champs obligatoires.")
+            alert("Please fill in all required fields.")
           }
           var checkIn = convertToISO(match[1]);
           var checkout = convertToISO(match[2]);
